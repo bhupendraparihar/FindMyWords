@@ -1,3 +1,4 @@
+
 (function(){
   var my2DArray = [
     ['H','O','E','L','V','H','D','S','N','C'],
@@ -77,6 +78,11 @@ function findRowsToCreateWords(arr){
   
   var rowsToFormWords = findRowsToCreateWords(my2DArray);
   
+  //Forming Trie Dictionary
+  const trieDictionary = new Trie();
+  for(var i = dictionary.length -1; i >= 0; i--){
+    trieDictionary.insert(dictionary[i]);
+  }
   //var myArray = rowsToFormWords[0];
   var allWords;
   rowsToFormWords.map(function(value){
@@ -84,7 +90,7 @@ function findRowsToCreateWords(arr){
     allWords = formWords(value);
     allWords.map(function(val){
       
-      if(dictionary.indexOf(val[0].toLowerCase())>-1){
+      if(trieDictionary.search(val[0].toLowerCase())){
         console.log(val);
         $('.outputWords').append('<p>' + val[0] + '</p>');
         $(val[1]).css('background-color','GREEN');
